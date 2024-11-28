@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/mvc
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/security
+                           http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Enable Transaction Management -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- Component Scanning -->
+    <context:component-scan base-package="VRV" />
+
+    <!-- Enable Spring MVC -->
+    <mvc:annotation-driven/>
+
+    <!-- Security Configuration -->
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/api/login" access="permitAll"/>
+        <security:intercept-url pattern="/api/register" access="permitAll"/>
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/user/**" access="hasAnyRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/**" access="isAuthenticated"/>
+        <security:form-login login-processing-url="/api/login" default-target-url="/home"/>
+        <security:logout logout-success-url="/"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="userDetailsService">
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- View Resolver for JSP Pages -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="/WEB-INF/Views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- DataSource Configuration -->
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="ds">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://vrv.ctqag0kce97s.ap-south-1.rds.amazonaws.com:3306/VRV"/>
+        <property name="username" value="admin"/>
+        <property name="password" value="VRVdatabasepassword"/>
+    </bean>
+
+    <!-- Hibernate Session Factory Configuration -->
+    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="localfactory">
+        <property name="dataSource" ref="ds"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>VRV.Model.User</value>
+                <value>VRV.Model.Task</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Hibernate Template Bean -->
+    <bean class="org.springframework.orm.hibernate5.HibernateTemplate" id="hibernateTemplate">
+        <property name="sessionFactory" ref="localfactory"/>
+    </bean>
+
+    <!-- Hibernate Transaction Manager Bean -->
+    <bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager">
+        <property name="sessionFactory" ref="localfactory"/>
+    </bean>
+
+    <!-- Password Encoder for Security -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+</beans>
