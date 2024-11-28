@@ -39,6 +39,7 @@ To test the API endpoints, you can import the provided Postman collection and us
    - Click on the **Import** button in the top left corner.
    - Choose **File** and select the `User Management Backend.postman_collection.json` file to import the collection.
 
-2. **Test the APIs Using the Hosted URL**:  
-   The hosted URL for testing the API endpoints is:
+2. **Test the APIs Using the Hosted URL**:
+   **Base URL**: http://13.201.21.187:8080/VRV/
+   The hosted URL for testing the API endpoints is:http://13.201.21.187:8080/VRV/endpoints
 
