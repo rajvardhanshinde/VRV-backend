@@ -28,4 +28,17 @@ Make sure you have the following installed:
 - Maven (for building the project)
 - MySQL Database Server
 
-### Use my hosted Url and postman APIs
+### Use My Hosted URL and Postman APIs
+
+To test the API endpoints, you can import the provided Postman collection and use the hosted URL.
+
+1. **Import the Postman Collection**:  
+   Download the Postman collection file `User Management Backend.postman_collection.json` and import it into Postman.
+
+   - Open Postman.
+   - Click on the **Import** button in the top left corner.
+   - Choose **File** and select the `User Management Backend.postman_collection.json` file to import the collection.
+
+2. **Test the APIs Using the Hosted URL**:  
+   The hosted URL for testing the API endpoints is:
+
