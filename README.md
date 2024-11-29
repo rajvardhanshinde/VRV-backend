@@ -1,6 +1,6 @@
 # VRV Project
 
-The User Management platform is a web-based platform designed for task and user profile management. It provides a seamless experience by offering role-based access to users and administrators. The platform allows users to create, update, and view tasks, while admins can manage tasks and user profiles with full access. The application uses Spring Boot for the backend, Hibernate for ORM, MySQL as the database, and Spring Security for authentication and authorization.
+The User Management platform is a web-based platform designed for task and user profile management. It provides a seamless experience by offering role-based access to users and administrators. The platform allows users to create, update, and view tasks, while admins can manage tasks and user profiles with full access. The application uses Spring MVC for the backend, Hibernate for ORM, MySQL as the database, and Spring Security for authentication and authorization.
 
 ## Features
 
@@ -11,7 +11,7 @@ The User Management platform is a web-based platform designed for task and user 
 
 ## Technology Stack
 
-- **Backend**: Spring Boot
+- **Backend**: Spring MVC
 - **Database**: MySQL with Hibernate ORM
 - **Security**: Spring Security, JWT, BCrypt Password Encoder
 - **Frontend**: Minimalistic, intuitive design (supports interaction with RESTful APIs)
