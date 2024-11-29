@@ -1,6 +1,6 @@
 # VRV Project
 
-The VRV Project is a web-based platform designed for task and user profile management. It provides a seamless experience by offering role-based access to users and administrators. The platform allows users to create, update, and view tasks, while admins can manage tasks and user profiles with full access. The application uses Spring Boot for the backend, Hibernate for ORM, MySQL as the database, and Spring Security for authentication and authorization.
+The User Management platform is a web-based platform designed for task and user profile management. It provides a seamless experience by offering role-based access to users and administrators. The platform allows users to create, update, and view tasks, while admins can manage tasks and user profiles with full access. The application uses Spring Boot for the backend, Hibernate for ORM, MySQL as the database, and Spring Security for authentication and authorization.
 
 ## Features
 
